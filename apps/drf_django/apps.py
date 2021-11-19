@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class DrfDjangoConfig(AppConfig):
-    name = 'drf_django'
+    name = 'apps.drf_django'

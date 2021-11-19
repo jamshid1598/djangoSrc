@@ -11,6 +11,18 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
+
+secret_key = config('SECRET_KEY', default='')
+debug=config('DEBUG', cast=bool, default=True)
+
+db_name = config('DB_NAME', default='db.sqlite3')
+db_port = config('')
+db_user = config('')
+db_password = config('')
+db_engine = config('')
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -49,6 +61,8 @@ INSTALLED_APPS = [
     'apps.signals_django.apps.SignalsDjangoConfig',
     'apps.users.apps.UsersConfig',
 ]
+
+AUTH_USER_MODEL = 'users.CustomUserModel'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
