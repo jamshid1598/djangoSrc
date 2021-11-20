@@ -1,1 +1,8 @@
+.env
 /env
+__pycache__/
+/__pycache__/
+*.sqlite3
+*.sqlite
+media/
+media_root/

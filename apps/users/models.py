@@ -12,18 +12,18 @@ from .manager import CustomUserManager
 
 class CustomUserModel(AbstractBaseUser, PermissionsMixin):
     user_id      = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4, unique=True)
-    image        = models.ImageField(_("Image"), upload_to='image/user/', blank=True, null=True)
-    username     = models.CharField(_("Username"), max_length=200, unique=True, )
+    image        = models.ImageField(_("Image"), upload_to='image/user/', help_text='User image (optional)', blank=True, null=True)
+    username     = models.CharField(_("Username"), max_length=200, unique=True,)
     first_name   = models.CharField(_("First Name"), max_length=200, blank=True, null=True)
-    second_name  = models.CharField(_("Second Name"), max_length=200, blank=True, null=True)
-    third_name   = models.CharField(_("Third Name"), max_length=200, blank=True, null=True)
+    last_name    = models.CharField(_("Last Name"), max_length=200, blank=True, null=True)
+    middle_name  = models.CharField(_("Middle Name"), max_length=200, blank=True, null=True)
     phone_number = PhoneNumberField(_("Phone Number"), blank=True, null=True)
     email        = models.EmailField(_("Email"), blank=True, null=True)
     
-    created_at = models.DateField(_("Created at"), auto_add_now=True)
-    updated_at = models.Datefield(_("Updated at"), auto_add=True)
+    created_at = models.DateField(_("Created at"), auto_now_add=True)
+    updated_at = models.DateField(_("Updated at"), auto_now=True)
     
-    is_active    = models.BooleanField("is active", default=False)
+    is_active    = models.BooleanField("is active", default=True)
     is_staff     = models.BooleanField("is staff", default=False)
     is_superuser = models.BooleanField("is superuser", default=False)
     
@@ -45,7 +45,7 @@ class CustomUserModel(AbstractBaseUser, PermissionsMixin):
         return "user/%si/" % (self.user_id)
      
     @property
-    def image(self):
+    def imageURL(self):
         try:
             url = self.image.url 
         except:

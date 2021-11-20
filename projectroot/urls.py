@@ -23,13 +23,13 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('tinymce/', include('tinymce.urls')),
     
-    path("", include("apps.core.urls", namespace='core')),
-    path("blog/", include("apps.blog.urls", namespace="blog")),
+    path("",         include("apps.core.urls", namespace='core')),
+    path("blog/",    include("apps.blog.urls", namespace="blog")),
     path("account/", include("apps.users.urls", namespace='users')),
-    path("drf/", include("apps.drf_django.urls", namespace='drf')),
+    path("drf/",     include("apps.drf_django.urls", namespace='drf')),
     path("signals/", include("apps.signals_django.urls", namespace='signals')),
 ]
 
-
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
