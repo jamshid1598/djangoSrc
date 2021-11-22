@@ -4,8 +4,6 @@ from django.utils.translation import gettext_lazy as _
 from django.contrib.auth import get_user_model
 User = get_user_model()
 
-
-
 # Create your models here.
 
 
@@ -16,15 +14,12 @@ class Category(models.Model):
     created_at = models.DateField(_("created at"), auto_now_add=True)
     updated_at = models.DateField(_("updated at"), auto_now=True)
     class Meta:
-        ordering=['category', 'created_at', 'updated_at']
+        ordering=['name', 'created_at', 'updated_at']
         verbose_name = _('Category')
         verbose_name_plural=_("Categories")
     
     def __str__(self):
-        try:
-            return self.category
-        except:
-            return f"category name {self.id}"
+        return self.name
         
 
 class Post(models.Model):
@@ -36,9 +31,8 @@ class Post(models.Model):
     subtitle = models.CharField(_("Subtitle"), max_length=400, blank=True, null=True)
     author   = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True, related_name='user_posts', verbose_name=_("Author"))
     body     = models.TextField(_("Body"), blank=True, null=True)
-    
-    likes       = models.ManyToManyField()
-    views_count = models.PositiveIntegerField(_("Views Count"), default=0)
+
+    views_count = models.PositiveIntegerField(_("Views Count"), default=0)    
     
     created_at = models.DateField(_("created at"), auto_now_add=True)
     updated_at = models.DateField(_("updated at"), auto_now=True)
@@ -47,26 +41,20 @@ class Post(models.Model):
         ordering = ['id', 'category', 'author',]
     
     def __str__(self):
-        try:
-            author = f"{self.author.username}" or ""
-            category = f"{self.category.name}" or ""
-            title    = f"{self.title}" or f"{self.id}"
-            text = f"{category} | {title} ({author})"
-        except:
-            text = f"post - {self.id}"
-        else:
-            text = "uncompleted post"
-        return text
+        return self.title
     
-    # @property
-    # def likes_count(self):
-    #     return self.likes.
+    @property
+    def reaction_count(self):
+        return self.post_reaction.all().count()
     
+    @property
+    def comment_count(self):
+        return self.post_comment.all().count() 
 
 class PostImages(models.Model):
     post  = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='post_images', verbose_name='Post')
     
-    image = models.ImageField(_("Post Image"), upload_to='post-images/body/%d/%m/%Y/')
+    image   = models.ImageField(_("Post Image"), upload_to='post-images/body/%d/%m/%Y/')
     caption = models.CharField(_("Caption"), max_length=300, blank=True, null=True)
     
     class Meta:
@@ -75,7 +63,62 @@ class PostImages(models.Model):
         verbose_name_plural = _("Post Images")
         
     def __str__(self):
-        try:
-            return f"image id {self.id} | post id {self.post.id}"
-        except:
-            return f"image id {self.id}"
+        return f"image id {self.id}"
+
+class PostComment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True, related_name="user_comment", verbose_name=_("User"))
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='post_comment', verbose_name=_("Post"))
+
+    comment  = models.CharField(_("Comment"), max_length=500, blank=True, null=True)
+
+    created_at = models.DateField(_("created at"), auto_now_add=True)
+    updated_at = models.DateField(_("updated at"), auto_now=True)
+    class Meta:
+        ordering = ['id', 'updated_at', 'created_at']
+        verbose_name = _("Post Comment")
+        verbose_name_plural = _("Post Comments")
+    
+    def __str__(self):
+        return f"comment id: {self.id}"
+
+class PostReaction(models.Model):
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True, related_name='user_reaction', verbose_name=_("User"))
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="post_reaction", verbose_name=_("Post"))
+    class ReactionChoice(models.TextChoices):
+        LIKE  = 'like',  '👍'
+        LOVE  = 'love',  '❤️'
+        LOL   = 'lol',   '😂'
+        ANGRY = 'angry', '😡'
+        CRY   = 'cry',   '😭'
+    reaction = models.CharField(_("Reaction"), max_length=10, blank=True, null=True, choices=ReactionChoice.choices)
+    
+    created_at = models.DateField(_('created at'), auto_now_add=True)
+    updated_at = models.DateField(_('updated at'), auto_now=True)
+    class Meta:
+        ordering = ['id', 'created_at', 'updated_at']
+        verbose_name = _('Post Reaction')
+        verbose_name_plural = _('Post Reactions')
+    
+    def __str__(self):
+        return f"reaction id: {self.id}"
+
+class CommentReaction(models.Model):
+    user    = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True, related_name='user_reaction', verbose_name=_("User"))
+    comment = models.ForeignKey(PostComment, on_delete=models.CASCADE, related_name="comment_reaction", verbose_name=_("Comment"))
+    class ReactionChoice(models.TextChoices):
+        LIKE  = 'like',  '👍'
+        LOVE  = 'love',  '❤️'
+        LOL   = 'lol',   '😂'
+        ANGRY = 'angry', '😡'
+        CRY   = 'cry',   '😭'
+    reaction = models.CharField(_("Reaction"), max_length=10, blank=True, null=True, choices=ReactionChoice.choices)
+    
+    created_at = models.DateField(_('created at'), auto_now_add=True)
+    updated_at = models.DateField(_('updated at'), auto_now=True)
+    class Meta:
+        ordering = ['id', 'created_at', 'updated_at']
+        verbose_name = _('Comment Reaction')
+        verbose_name_plural = _('Comment Reactions')
+    
+    def __str__(self):
+        return f"reaction id: {self.id}"
