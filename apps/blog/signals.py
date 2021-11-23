@@ -8,6 +8,7 @@ from django.dispatch import receiver
 # @receiver(post_save, sender=Category)
 def create_category_slug(sender, instance, created, **kwargs):
     if not instance.slug:
+        # print("instance.slug = ", instance.slug)
         instance.slug=slugify(instance.name)
         instance.save()
 # post_save.conntect(create_category_slug, sender=Category)

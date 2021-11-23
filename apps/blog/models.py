@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-
+from django.utils.text import slugify
 from django.contrib.auth import get_user_model
 User = get_user_model()
 # from apps.users.models import User
@@ -9,7 +9,7 @@ User = get_user_model()
 
 class Category(models.Model):
     name = models.CharField(_("Category Name"), max_length=200, unique=True)
-    slug = models.SlugField(max_length=250, unique=True)
+    slug = models.SlugField(max_length=250, blank=True, null=True, unique=True)
     
     created_at = models.DateField(_("created at"), auto_now_add=True)
     updated_at = models.DateField(_("updated at"), auto_now=True)
@@ -20,6 +20,10 @@ class Category(models.Model):
     
     def __str__(self):
         return self.name
+    
+    def save(self, *args, **kwargs):
+        self.slug=slugify(self.name)
+        return super(Category, self).save(*args, **kwargs)
         
 
 class Post(models.Model):
