@@ -22,11 +22,8 @@ db_user = config('DB_USER', default='postgres')
 db_password = config('DB_PASSWORD', default='')
 db_engine = config('DB_ENGINE', default='django.db.backends.sqlite3')
 
-
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -39,6 +36,26 @@ DEBUG = debug
 
 ALLOWED_HOSTS = []
 
+#  tinymce configuration
+TINYMCE_DEFAULT_CONFIG = {
+    'height': 400, 
+    'width': 800, 
+    'cleanup_on_startup': True, 
+    'custom_undo_redo_levels': 20, 
+    'selector': 'textarea', 
+    'theme': 'modern', 
+    'plugins': ''' textcolor save link image media preview codesample contextmenu 
+                   table code lists fullscreen insertdatetime nonbreaking contextmenu 
+                   directionality searchreplace wordcount visualblocks visualchars 
+                   code fullscreen autolink lists charmap print hr anchor pagebreak ''', 
+    'toolbar1': ''' fullscreen preview bold italic underline | fontselect, fontsizeselect | 
+                    forecolor backcolor | alignleft alignright | aligncenter alignjustify | 
+                    indent outdent | bullist numlist table | | link image media | codesample | ''', 
+    'toolbar2': ''' visualblocks visualchars | charmap hr pagebreak nonbreaking anchor | code | ''', 
+    'contextmenu': 'formats | link image', 
+    'menubar': True, 
+    'statusbar': True, 
+}
 
 # Application definition
 

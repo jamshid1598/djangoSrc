@@ -3,7 +3,7 @@ from django.utils.translation import gettext_lazy as _
 
 from django.contrib.auth import get_user_model
 User = get_user_model()
-
+# from apps.users.models import User
 # Create your models here.
 
 
@@ -82,7 +82,7 @@ class PostComment(models.Model):
         return f"comment id: {self.id}"
 
 class PostReaction(models.Model):
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True, related_name='user_reaction', verbose_name=_("User"))
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True, related_name='user_post_reaction', verbose_name=_("User"))
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="post_reaction", verbose_name=_("Post"))
     class ReactionChoice(models.TextChoices):
         LIKE  = 'like',  '👍'
@@ -103,7 +103,7 @@ class PostReaction(models.Model):
         return f"reaction id: {self.id}"
 
 class CommentReaction(models.Model):
-    user    = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True, related_name='user_reaction', verbose_name=_("User"))
+    user    = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True, related_name='user_comment_reaction', verbose_name=_("User"))
     comment = models.ForeignKey(PostComment, on_delete=models.CASCADE, related_name="comment_reaction", verbose_name=_("Comment"))
     class ReactionChoice(models.TextChoices):
         LIKE  = 'like',  '👍'
