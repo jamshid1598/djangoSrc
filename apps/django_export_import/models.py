@@ -17,7 +17,7 @@ class Category(models.Model):
     
 class Book(models.Model):
     name = models.CharField('Book name', max_length=100)
-    author = models.ForeignKey(Author, blank=True, null=True)
+    author = models.ForeignKey(Author, on_delete=models.SET_NULL, blank=True, null=True)
     author_email = models.EmailField('Author email', max_length=75, blank=True)
     imported = models.BooleanField(default=False)
     published = models.DateField('Published', blank=True, null=True)
