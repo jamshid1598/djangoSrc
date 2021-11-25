@@ -71,12 +71,14 @@ INSTALLED_APPS = [
     'tinymce',
     'phonenumber_field',
     'smart_selects',
+    'import_export',
     
     'apps.blog.apps.BlogConfig',
     'apps.core.apps.CoreConfig',
     'apps.drf_django.apps.DrfDjangoConfig',
     'apps.signals_django.apps.SignalsDjangoConfig',
     'apps.users.apps.UsersConfig',
+    'apps.django_export_import.apps.DjangoExportImportConfig',
 ]
 
 AUTH_USER_MODEL = 'users.CustomUserModel'
