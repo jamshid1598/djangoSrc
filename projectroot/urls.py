@@ -28,6 +28,7 @@ urlpatterns = [
     path("account/", include("apps.users.urls", namespace='users')),
     path("drf/",     include("apps.drf_django.urls", namespace='drf')),
     path("signals/", include("apps.signals_django.urls", namespace='signals')),
+    path('import_export/', include("apps.django_import_export.urls", namespace='django_export_import')),
 ]
 
 if settings.DEBUG:

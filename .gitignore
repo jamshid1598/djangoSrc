@@ -6,3 +6,5 @@ __pycache__/
 *.sqlite
 media/
 media_root/
+static/
+static_root/

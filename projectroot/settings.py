@@ -78,7 +78,7 @@ INSTALLED_APPS = [
     'apps.drf_django.apps.DrfDjangoConfig',
     'apps.signals_django.apps.SignalsDjangoConfig',
     'apps.users.apps.UsersConfig',
-    'apps.django_export_import.apps.DjangoExportImportConfig',
+    'apps.django_import_export.apps.DjangoImportExportConfig',
 ]
 
 AUTH_USER_MODEL = 'users.CustomUserModel'
@@ -162,7 +162,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIS_ROOT = BASE_DIR / 'static_root/'
+STATIC_ROOT = BASE_DIR / 'static_root/'
 
 staticfiles_dirs = BASE_DIR / 'static/'
 STATICFILES_DIRS = [
