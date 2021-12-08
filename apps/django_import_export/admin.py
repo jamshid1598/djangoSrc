@@ -1,15 +1,7 @@
 from django.contrib import admin
-from import_export import resources, fields
 from import_export.admin import (
     ImportExportModelAdmin, 
     ImportExportActionModelAdmin,
-    
-    ExportMixin,
-    ImportMixin,
-    ImportExportMixin,
-    
-    ExportActionMixin,
-    ExportActionModelAdmin,
 )
 
 from .models import (
@@ -17,35 +9,18 @@ from .models import (
     Category,
     Book,
 )
+from .resources import (
+    BookResource,
+)
 from .forms import (
     BookImportForm,
     CustomConfirmImportForm,
 )
+
 # Register your models here.
 
-class BookResource(resources.ModelResource):
-    published = fields.Field(attribute='published', column_name='published_date')
-    extra_column = fields.Field(column_name='extra-column')
-    full_title = fields.Field()
-    # class Meta:
-    #     model=Book
-    #     fields = ('name', 'author__name', 'author_email', 'published', 'price', 'categories__name')
-    #     exclude = ('imported',)
-    #     export_order = ('categories__name', 'name', 'author__name', 'author_email', 'published', 'price',)
-    class Meta:
-        model=Book
-        fields = ('id', 'author_email', 'published', 'price', 'categories')
-        exclude = ('imported',)
-        export_order = ('id', 'categories', 'full_title', 'author_email', 'published', 'price',)
-        widgets = {
-            'published_date': {'format': '%d.%m.%Y'},
-        }
-        
-    def dehydrate_full_title(self, book):
-        return f"{book.name} by {book.author.name}"
 
-
-class BookAdmin(ImportMixin, admin.ModelAdmin):
+class BookAdmin(ImportExportModelAdmin, ImportExportActionModelAdmin):
     resource_class = BookResource
 
     list_display = ('name', 'author', 'author_email', 'published', 'price',)
