@@ -79,6 +79,7 @@ INSTALLED_APPS = [
     'apps.signals_django.apps.SignalsDjangoConfig',
     'apps.users.apps.UsersConfig',
     'apps.django_import_export.apps.DjangoImportExportConfig',
+    'apps.django_celery.apps.DjangoCeleryConfig',
 ]
 
 AUTH_USER_MODEL = 'users.CustomUserModel'
