@@ -8,6 +8,7 @@ click-didyoumean==0.3.0
 click-plugins==1.1.1
 click-repl==0.2.0
 defusedxml==0.7.1
+Deprecated==1.2.13
 diff-match-patch==20200713
 Django==3.1.6
 django-decouple==2.1
@@ -28,10 +29,12 @@ pkg_resources==0.0.0
 prompt-toolkit==3.0.24
 pytz==2021.3
 PyYAML==6.0
+redis==4.0.2
 six==1.16.0
 sqlparse==0.4.2
 tablib==3.1.0
 vine==5.0.0
 wcwidth==0.2.5
+wrapt==1.13.3
 xlrd==2.0.1
 xlwt==1.3.0
