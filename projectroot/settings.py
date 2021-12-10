@@ -22,6 +22,15 @@ db_user = config('DB_USER', default='postgres')
 db_password = config('DB_PASSWORD', default='')
 db_engine = config('DB_ENGINE', default='django.db.backends.sqlite3')
 
+
+email_backend       = config("EMAIL_BACKEND", default='django.core.mail.backends.smtp.EmailBackend')
+email_use_tls       = config("EMAIL_USE_TLS", cast=bool, default=True)
+email_host          = config("EMAIL_HOST", default='smtp.gmail.com')
+email_host_user     = config("EMAIL_HOST_USER", default='dovurovjamshid95@gmail.com')
+email_host_password = config("EMAIL_HOST_PASSWORD")
+email_port          = config("EMAIL_PORT", cast=int, default=587)
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -181,11 +190,18 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media_root'
 
 
+# smpt gmail stuff
+EMAIL_BACKEND       = email_backend
+EMAIL_USE_TLS       = email_use_tls
+EMAIL_HOST          = email_host
+EMAIL_HOST_USER     = email_host_user
+EMAIL_HOST_PASSWORD = email_host_password
+EMAIL_PORT          = email_port
 
 # CELERY STUFF
-BROKER_URL = 'redis://127.0.0.1:6379'
-CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379'
-CELERY_ACCEPT_CONTENT = ['application/json']
-CELERY_TASK_SERIALIZER = 'json'
+BROKER_URL               = 'redis://127.0.0.1:6379'
+CELERY_RESULT_BACKEND    = 'redis://127.0.0.1:6379'
+CELERY_ACCEPT_CONTENT    = ['application/json']
+CELERY_TASK_SERIALIZER   = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
-CELERY_TIMEZONE = 'Asia/Tashkent'
+CELERY_TIMEZONE          = 'Asia/Tashkent'

@@ -31,6 +31,7 @@ urlpatterns = [
     path("drf/",     include("apps.drf_django.urls", namespace='drf')),
     path("signals/", include("apps.signals_django.urls", namespace='signals')),
     path('import_export/', include("apps.django_import_export.urls", namespace='django_export_import')),
+    path('celery/',  include("apps.django_celery.urls", namespace='django-celery')),
 ]
 
 if settings.DEBUG:

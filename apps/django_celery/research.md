@@ -15,7 +15,7 @@
 
 [using celery with django (official docs)](https://docs.celeryproject.org/en/latest/django/first-steps-with-django.html#using-celery-with-django)
 
-
+[supervisord](http://supervisord.org/)
 
 ##############################
 #    chack Celery worker     #
