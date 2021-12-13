@@ -24,3 +24,26 @@
 $ celery -A projectroot worker -l info
 
 
+
+
+% ====================================== %
+%       using RebbitMQ with Celery       %
+% ====================================== %
+[using RabbitMQ with Celery](https://docs.celeryproject.org/en/latest/getting-started/backends-and-brokers/rabbitmq.html#broker-rabbitmq)
+# installing Ubuntu or Debian
+$: sudo apt-get install rabbitmq-server
+# run rabbitmq on docker
+$: docker run -d -p 5672:5672 rabbitmq
+
+
+% ====================================== %
+%        using Redis with Celery         %
+% ====================================== %
+[Using Redis with Celery](https://docs.celeryproject.org/en/latest/getting-started/backends-and-brokers/redis.html#broker-redis)
+#installing on Ubuntu or Debian
+$: sudo apt-get install redis-server
+# run redis on docker
+$: docker run -d -p 6379:6379 redis
+
+
+
