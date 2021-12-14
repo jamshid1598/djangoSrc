@@ -199,8 +199,8 @@ EMAIL_HOST_PASSWORD = email_host_password
 EMAIL_PORT          = email_port
 
 # CELERY STUFF
-BROKER_URL               = 'redis://127.0.0.1:6379'
-CELERY_RESULT_BACKEND    = 'redis://127.0.0.1:6379'
+BROKER_URL               = 'redis://127.0.0.1:6379' # broker for message transport
+CELERY_RESULT_BACKEND    = 'redis://127.0.0.1:6379' # result backend
 CELERY_ACCEPT_CONTENT    = ['application/json']
 CELERY_TASK_SERIALIZER   = 'json'
 CELERY_RESULT_SERIALIZER = 'json'

@@ -10,16 +10,18 @@
 
 [How to Use Redis With Python?](https://realpython.com/python-redis/#installing-redis-from-source)
 
-[installing redis-server on kali](https://installati.one/kalilinux/redis/)
-
-
 [using celery with django (official docs)](https://docs.celeryproject.org/en/latest/django/first-steps-with-django.html#using-celery-with-django)
 
 [supervisord](http://supervisord.org/)
 
-##############################
-#    chack Celery worker     #
-##############################
+[Daemonization](https://docs.celeryproject.org/en/stable/userguide/daemonizing.html#daemonizing)
+
+
+
+
+% ====================================== %
+%           chack Celery worker          %
+% ====================================== %
 
 $ celery -A projectroot worker -l info
 
@@ -40,10 +42,19 @@ $: docker run -d -p 5672:5672 rabbitmq
 %        using Redis with Celery         %
 % ====================================== %
 [Using Redis with Celery](https://docs.celeryproject.org/en/latest/getting-started/backends-and-brokers/redis.html#broker-redis)
+
 #installing on Ubuntu or Debian
+[installing redis-server on kali](https://installati.one/kalilinux/redis/)
 $: sudo apt-get install redis-server
 # run redis on docker
 $: docker run -d -p 6379:6379 redis
 
 
+[Result Backends](https://docs.celeryproject.org/en/stable/userguide/tasks.html#task-result-backends)
+
+[RPC backend settings](https://docs.celeryproject.org/en/stable/userguide/configuration.html#conf-rpc-result-backend)
+
+[celery Configuration and defaults](https://docs.celeryproject.org/en/stable/userguide/configuration.html#configuration)
+
+[]()
 
