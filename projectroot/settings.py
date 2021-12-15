@@ -88,7 +88,7 @@ INSTALLED_APPS = [
     'apps.signals_django.apps.SignalsDjangoConfig',
     'apps.users.apps.UsersConfig',
     'apps.django_import_export.apps.DjangoImportExportConfig',
-    'apps.django_celery.apps.DjangoCeleryConfig',
+    # 'apps.django_celery.apps.DjangoCeleryConfig',
 ]
 
 AUTH_USER_MODEL = 'users.CustomUserModel'
@@ -156,9 +156,10 @@ AUTH_PASSWORD_VALIDATORS = [
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
-    ]
+    ],
+    'DEFAULT_PAGINATION_CLASS':'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE':5,
 }
-
 
 
 # Internationalization
@@ -199,9 +200,9 @@ EMAIL_HOST_PASSWORD = email_host_password
 EMAIL_PORT          = email_port
 
 # CELERY STUFF
-BROKER_URL               = 'redis://127.0.0.1:6379' # broker for message transport
-CELERY_RESULT_BACKEND    = 'redis://127.0.0.1:6379' # result backend
-CELERY_ACCEPT_CONTENT    = ['application/json']
-CELERY_TASK_SERIALIZER   = 'json'
-CELERY_RESULT_SERIALIZER = 'json'
-CELERY_TIMEZONE          = 'Asia/Tashkent'
+# BROKER_URL               = 'redis://127.0.0.1:6379' # broker for message transport
+# CELERY_RESULT_BACKEND    = 'redis://127.0.0.1:6379' # result backend
+# CELERY_ACCEPT_CONTENT    = ['application/json']
+# CELERY_TASK_SERIALIZER   = 'json'
+# CELERY_RESULT_SERIALIZER = 'json'
+# CELERY_TIMEZONE          = 'Asia/Tashkent'

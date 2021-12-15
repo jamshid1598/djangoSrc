@@ -1,44 +1,21 @@
 from django.urls import path, include
+from django.contrib.auth.models import Group
 from django.contrib.auth import get_user_model
 User = get_user_model()
-from rest_framework import (
-    routers, 
-    serializers, 
-    viewsets,
+from rest_framework import routers
+
+from .views import (
+    UserViewSet,
+    GroupViewSet,
 )
-
-class UserSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model=User
-        fields=[
-            'url'
-            'user_id'
-            'username',
-            'image',
-            'first_name',
-            'last_name',
-            'middle_name',
-            'phone_number',
-            'email',
-            
-            'created_at',
-            'updated_at',
-        ]
-
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-
-
-router = routers.DefaultRouter()
-router.register(r"users", UserViewSet)
-
 
 app_name='drf'
 
 
-
+router = routers.DefaultRouter()
+router.register(r"users", UserViewSet)
+router.register(r"groups", GroupViewSet)
 
 urlpatterns = [
-    path('', include(router.urls ))
+    path('', include(router.urls)),
 ]
