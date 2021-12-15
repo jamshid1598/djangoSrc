@@ -8,7 +8,7 @@ from rest_framework import (
     permissions,
 )
 
-from .serializers import (
+from apps.users.serializers import (
     UserSerializer,
     GroupSerializer,
 )
