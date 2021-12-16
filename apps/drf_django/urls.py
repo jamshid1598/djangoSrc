@@ -1,21 +1,14 @@
 from django.urls import path, include
-from django.contrib.auth.models import Group
-from django.contrib.auth import get_user_model
-User = get_user_model()
 from rest_framework import routers
-
-from .views import (
-    UserViewSet,
-    GroupViewSet,
-)
+from .views import snippet_list
 
 app_name='drf'
 
+# router = routers.DefaultRouter()
+# router.register(r"snippet", snippet_list)
 
-router = routers.DefaultRouter()
-router.register(r"users", UserViewSet)
-router.register(r"groups", GroupViewSet)
 
 urlpatterns = [
-    path('', include(router.urls)),
+    # path('', include(router.urls)),
+    path("snippet-list/", snippet_list, name='snippet-list'),
 ]

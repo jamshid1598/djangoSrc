@@ -9,7 +9,7 @@ User = get_user_model()
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
-    url = serializers.HyperlinkedIdentityField(view_name="drf:customusermodel-detail")
+    url = serializers.HyperlinkedIdentityField(view_name="users:customusermodel-detail")
     class Meta:
         model = User
         fields = '__all__'

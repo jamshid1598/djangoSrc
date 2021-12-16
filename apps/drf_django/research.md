@@ -75,3 +75,17 @@ urlpatters = [
 
 ]
 
+
+
+#  STATUS CODE #
+
+200 - OK success status response code (request has succeeded)
+201 - Created success status response (request has succeeded and has led to the creation of a resource)
+202 - Accepted response status code (the request has been accepted for processing, but the processing has not been completed)
+204 - No Content success status response (request has succeeded, but that the client doesn't need to navigate away from its current page)
+
+
+
+
+400 - 
+404 - 
