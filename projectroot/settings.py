@@ -88,6 +88,7 @@ INSTALLED_APPS = [
     'apps.signals_django.apps.SignalsDjangoConfig',
     'apps.users.apps.UsersConfig',
     'apps.django_import_export.apps.DjangoImportExportConfig',
+    "apps.studentExam.apps.StudentexamConfig",
     # 'apps.django_celery.apps.DjangoCeleryConfig',
 ]
 
