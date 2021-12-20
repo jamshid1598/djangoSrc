@@ -10,6 +10,7 @@ from import_export import (
 #     ManyToManyWidget,
 # )
 from .models import (
+    TestDB,
    Student,
 )
 
@@ -61,3 +62,20 @@ class StudentResource(resources.ModelResource):
     def before_import_row(self, row, row_number=None, **kwargs):
         
         pass
+
+class TestDBResource(resources.ModelResource):
+    id = fields.Field(attribute='id', column_name='№')
+    q = fields.Field(attribute='q', column_name="Savol/ Вопрос")
+    a = fields.Field(attribute='a', column_name="Javob 1 (To'g'ri Javob)/ Ответ 1 (Правильный ответ)")
+    b = fields.Field(attribute='b', column_name="Javob 2/ Ответ 2")
+    c = fields.Field(attribute='c', column_name="Javob 3/ Ответ 3")
+    d = fields.Field(attribute='d', column_name="Javob 4/ Ответ 4")
+    
+    class Meta:
+        model=TestDB
+        fields = (
+            "id", "q", "a", "b", "c", "d",
+        )
+        export_order = (
+            "id", "q", "a", "b", "c", "d",
+        )

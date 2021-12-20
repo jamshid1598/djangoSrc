@@ -4,10 +4,39 @@ from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 
 # Create your views here.
-from .models import Student
+from .models import Student, TestDB
 
 import xlrd
 
+
+def read_txt(request):
+    file1 = open('/home/jamshid/Documents/django/djangoSrc/apps/studentExam/exam-data/English.txt', 'r')
+    Lines = file1.readlines()
+
+    # Strips the newline character
+    for line in Lines:
+        if line.startswith("25"):
+            line = line.replace("25", " ")
+            print("savol: ", line.strip())
+            q = TestDB(q=line)
+        if line.startswith("A."):
+            line = line.replace("A.", " ")
+            print("A:", line.strip())
+            q.a=line
+        if line.startswith("B."):
+            line = line.replace("B.", " ")
+            print("B:", line.strip())
+            q.b=line
+        if line.startswith("C."):
+            line = line.replace("C.", " ")
+            print("C:", line.strip())
+            q.c=line
+        if line.startswith("D."):
+            line = line.replace("D.", " ")
+            print("D:", line.strip())
+            q.d=line
+            q.save()
+    return HttpResponse("success")
 
 
 def import_func(request):

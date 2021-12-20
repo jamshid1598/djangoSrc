@@ -5,6 +5,14 @@ from django.db import models
 # Moliya va buxgalteriya hisobi fakulteti bo'yicha talabalar o'qishini ko'chirish (tiklash) jarayonida aniqlangan fanlar farqi bo'yicha ma'lumot
 # Moliya va buxgalteriya hisobi fakulteti bo'yicha talabalar o'qishini ko'chirish (tiklash) jarayonida aniqlangan fanlar farq
 
+class TestDB(models.Model):
+    q = models.CharField(max_length=555)
+    a = models.CharField(max_length=555)
+    b = models.CharField(max_length=555)
+    c = models.CharField(max_length=555)
+    d = models.CharField(max_length=555)
+    def __str__(self) -> str:
+        return self.q
 
 class Student(models.Model):
     l_name = models.CharField(max_length=255, blank=True, null=True)

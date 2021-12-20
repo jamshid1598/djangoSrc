@@ -5,9 +5,11 @@ from import_export.admin import (
 )
 
 from .models import (
+   TestDB,
    Student,
 )
 from .resources import (
+    TestDBResource,
     StudentResource,
 )
 
@@ -20,3 +22,10 @@ class StudentAdmin(ImportExportModelAdmin, ImportExportActionModelAdmin):
     list_display = ('id', 'f_name', 'l_name', 'm_name', 'group', 'direction')
     
 admin.site.register(Student, StudentAdmin)
+
+
+class TestDBAdmin(ImportExportModelAdmin, ImportExportActionModelAdmin):
+    resource_class = TestDBResource
+    list_display = ('id', 'q')
+    
+admin.site.register(TestDB, TestDBAdmin)
