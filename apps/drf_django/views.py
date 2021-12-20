@@ -9,6 +9,7 @@ from rest_framework import (
     status,
 )
 from rest_framework.response import Response
+from rest_framework.reverse import reverse
 from rest_framework.decorators import api_view
 from django.http import (
     Http404,
@@ -29,6 +30,18 @@ from .permissions import (
     IsOwnerOrReadOnly,
 )
 # Create your views here.
+
+
+@api_view(["GET"])
+def api_root(request, format=None):
+    return Response({
+        "users":reverse("drf:user-snippet-list-v1", request=request, format=format),
+        "snippets":reverse("drf:snippet-list-v5", request=request, format=format),
+    })
+
+
+
+
 
 @csrf_exempt
 def snippet_list_create_v1(request):
