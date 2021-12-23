@@ -2,7 +2,9 @@ from django.urls import path, include
 from rest_framework import routers
 from rest_framework.urlpatterns import format_suffix_patterns
 from .views import (
-
+    api_root,
+    SnippetHighlighted,
+    
     snippet_list_create_v1,
     snippet_list_create_v2,
     snippet_detail_v1,
@@ -29,6 +31,10 @@ app_name='drf'
 
 urlpatterns = [
     # path('', include(router.urls)),
+
+    path("", api_root, name="api-root"),
+    path("snippet/<int:id>/highlighted/", SnippetHighlighted.as_view(), name="snippet-highlighted"),
+
     path("snippet-list/v1/", snippet_list_create_v1, name='snippet-list-v1'),
     path("snippet-create/v1/", snippet_list_create_v1, name='snippet-create-v1'),
     path("snippet-detail/v1/<int:id>/", snippet_detail_v1, name="snippet-detail-v1"),

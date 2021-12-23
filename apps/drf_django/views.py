@@ -11,6 +11,7 @@ from rest_framework import (
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 from rest_framework.decorators import api_view
+from rest_framework import renderers 
 from django.http import (
     Http404,
     HttpResponse,
@@ -40,7 +41,14 @@ def api_root(request, format=None):
     })
 
 
+class SnippetHighlighted(generics.GenericAPIView):
+    queryset = Snippet.objects.all()
+    renderer_classes = [renderers.StaticHTMLRenderer]
+    lookup_field = "id"
 
+    def get(self, request, *args, **kwargs):
+        snippet = self.get_object()
+        return Response(snippet.highlighted, status=status.HTTP_200_OK)
 
 
 @csrf_exempt
