@@ -25,7 +25,7 @@ from .models import Snippet
 from .serializers import (
     SnippetSerializer,
     SnippetModelSerializer,
-    UserSnippetSerializer,
+    UserModelSerializer,
 )
 from .permissions import (
     IsOwnerOrReadOnly,
@@ -85,7 +85,6 @@ def snippet_list_create_v2(request, format=None):
 
 @csrf_exempt
 def snippet_detail_v1(request, id):
-    
     try:
         snippet = Snippet.objects.get(id=id)
     except:
@@ -233,10 +232,10 @@ class SnippetDetailUpdateDeleteGenericApiView(generics.RetrieveUpdateDestroyAPIV
 """
 class UserSnippetlistApiView(generics.ListAPIView):
     queryset = User.objects.all()
-    serializer_class = UserSnippetSerializer
+    serializer_class = UserModelSerializer
     
     
 class UserSnippetDetailApiView(generics.RetrieveAPIView):
     queryset = User.objects.all()
-    serializer_class = UserSnippetSerializer
+    serializer_class = UserModelSerializer
     lookup_field = 'user_id'
