@@ -23,6 +23,9 @@ User = get_user_model()
 
 from .models import Snippet
 from .serializers import (
+    SnippetHyperlinkedModelSerializer,
+    UserHyperlinkedModelSerializer,
+
     SnippetSerializer,
     SnippetModelSerializer,
     UserModelSerializer,
@@ -49,6 +52,18 @@ class SnippetHighlighted(generics.GenericAPIView):
     def get(self, request, *args, **kwargs):
         snippet = self.get_object()
         return Response(snippet.highlighted, status=status.HTTP_200_OK)
+
+
+class SnippetListCreateHyperlinkedApiView(generics.ListCreateAPIView):
+    """
+        v6
+    """
+    queryset = Snippet.objects.all()
+    serializer_class = SnippetHyperlinkedModelSerializer
+    permission_classes = [IsOwnerOrReadOnly]
+    
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
 
 
 @csrf_exempt
@@ -234,8 +249,19 @@ class UserSnippetlistApiView(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserModelSerializer
     
-    
 class UserSnippetDetailApiView(generics.RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = UserModelSerializer
     lookup_field = 'user_id'
+
+
+class UserSnippetListHyperlinkedApiView(generics.ListAPIView):
+    """
+        v2
+    Args:
+        generics (ListAPIView): returns list of users with snippets 
+    """
+    queryset = User.objects.all()
+    serializer_class = UserHyperlinkedModelSerializer
+    permissions_classes = [IsOwnerOrReadOnly]
+    
