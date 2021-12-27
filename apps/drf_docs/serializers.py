@@ -37,9 +37,10 @@ class SnippetHyperlinkedModelSerializer(serializers.HyperlinkedModelSerializer):
 class UserHyperlinkedModelSerializer(serializers.HyperlinkedModelSerializer):
     url = serializers.HyperlinkedIdentityField(
         lookup_field='user_id', 
-        view_name="users:customusermodel-detail")
+        view_name="drf:user-snippet-detail-v1")
     snippets = serializers.HyperlinkedRelatedField(
-        many=True, view_name='snippet-detail-update-delete-v5', read_only=True)
+        lookup_field='id',
+        many=True, view_name='drf:snippet-detail-update-delete-v5', read_only=True)
     class Meta:
         model=User
         fields = ['url', "user_id", "username", "snippets"]

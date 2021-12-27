@@ -1,5 +1,8 @@
 from django.urls import path, include
-from rest_framework import routers
+from rest_framework import (
+     routers,
+     renderers,
+)
 from rest_framework.urlpatterns import format_suffix_patterns
 from .views import (
     api_root,
@@ -24,6 +27,9 @@ from .views import (
 
     SnippetListCreateHyperlinkedApiView,
     UserSnippetListHyperlinkedApiView,
+    
+    SnippetModelViewSet,
+    UserReadOnlyModelViewSet,
 )
 
 app_name='drf'
@@ -31,10 +37,40 @@ app_name='drf'
 # router = routers.DefaultRouter()
 # router.register(r"snippet", snippet_list)
 
+snippet_list = SnippetModelViewSet.as_view({
+     "get":"list",
+     "post":"create",
+})
+snippet_detail = SnippetModelViewSet.as_view({
+     "get":"retrieve",
+     "put":"update",
+     "patch":"partial_update",
+     "delete":"destroy",
+})
+snippet_highlight = SnippetModelViewSet.as_view({
+     "get":"highlight",
+}, renderer_classes = [renderers.StaticHTMLRenderer])
+user_list = UserReadOnlyModelViewSet.as_view({
+     "get":"list"
+})
+user_detail = UserReadOnlyModelViewSet.as_view({
+     "get":"retrieve"
+})
+
+
 urlpatterns = [
+    path('', api_root),
+    path('snippets/', snippet_list, name='snippet-list'),
+    path('snippets/<int:pk>/', snippet_detail, name='snippet-detail'),
+    path('snippets/<int:pk>/highlight/', snippet_highlight, name='snippet-highlight'),
+    path('users/', user_list, name='user-list'),
+    path('users/<int:pk>/', user_detail, name='user-detail')
+]
+
+urlpatterns += [
     # path('', include(router.urls)),
 
-    path("", api_root, name="api-root"),
+#     path("", api_root, name="api-root"),
     path("snippet/<int:id>/highlighted/", SnippetHighlighted.as_view(), name="snippet-highlighted"),
 
     path("snippet-list-create/v1/", snippet_list_create_v1, name='snippet-list-create-v1'),

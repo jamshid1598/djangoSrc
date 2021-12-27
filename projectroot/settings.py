@@ -84,11 +84,12 @@ INSTALLED_APPS = [
     
     'apps.blog.apps.BlogConfig',
     'apps.core.apps.CoreConfig',
-    'apps.drf_django.apps.DrfDjangoConfig',
+    'apps.drf_docs.apps.DrfDocsConfig',
     'apps.signals_django.apps.SignalsDjangoConfig',
     'apps.users.apps.UsersConfig',
     'apps.django_import_export.apps.DjangoImportExportConfig',
     "apps.studentExam.apps.StudentexamConfig",
+    "apps.tryDrf.apps.TrydrfConfig",
     # 'apps.django_celery.apps.DjangoCeleryConfig',
 ]
 

@@ -10,12 +10,19 @@ from rest_framework import (
 )
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
-from rest_framework.decorators import api_view
+from rest_framework.decorators import (
+    api_view,
+    action,
+)
 from rest_framework import renderers 
 from django.http import (
     Http404,
     HttpResponse,
     JsonResponse,
+)
+from rest_framework.viewsets import (
+    ReadOnlyModelViewSet,
+    ModelViewSet,
 )
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import get_user_model
@@ -39,12 +46,45 @@ from .permissions import (
 @api_view(["GET"])
 def api_root(request, format=None):
     return Response({
-        "users":reverse("drf:user-snippet-list-v1", request=request, format=format),
-        "snippets":reverse("drf:snippet-list-v5", request=request, format=format),
+        "users":reverse("drf:user-snippet-list-v2", request=request, format=format),
+        "snippets":reverse("drf:snippet-list-create-v6", request=request, format=format),
     })
 
 
+class UserReadOnlyModelViewSet(ReadOnlyModelViewSet):
+    """
+        ViewSet API view
+        
+        This viewset automatically provides `list` and `retrieve` actions.
+    """
+    queryset = User.objects.all()
+    serializer_class = UserHyperlinkedModelSerializer
+
+
+class SnippetModelViewSet(ModelViewSet):
+    """
+        This viewset automatically provides `list`, `create`, `retrieve`,
+        `update` and `destroy` actions.
+
+        Additionally we also provide an extra `highlight` action.
+    """
+    queryset = Snippet.objects.all()
+    serializer_class = SnippetHyperlinkedModelSerializer
+    permission_classes = [IsOwnerOrReadOnly]
+    
+    @action(detail=True, renderer_classes=[renderers.StaticHTMLRenderer])
+    def highlight(self, request, *args, **kwargs):
+        snippet = self.get_object()
+        return Response(snippet.highlighted)
+    
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
+
 class SnippetHighlighted(generics.GenericAPIView):
+    """
+        generic API view
+    """
     queryset = Snippet.objects.all()
     renderer_classes = [renderers.StaticHTMLRenderer]
     lookup_field = "id"
