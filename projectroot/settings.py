@@ -69,6 +69,8 @@ TINYMCE_DEFAULT_CONFIG = {
 # Application definition
 
 INSTALLED_APPS = [
+    'jet.dashboard',
+    'jet',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -90,6 +92,7 @@ INSTALLED_APPS = [
     'apps.django_import_export.apps.DjangoImportExportConfig',
     "apps.studentExam.apps.StudentexamConfig",
     "apps.tryDrf.apps.TrydrfConfig",
+    "apps.jetReboot.apps.JetrebootConfig",
     # 'apps.django_celery.apps.DjangoCeleryConfig',
 ]
 
@@ -179,6 +182,9 @@ USE_L10N = True
 
 USE_TZ = True
 
+
+# django-jet-reboot configurations
+from .jet_settings import *
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
