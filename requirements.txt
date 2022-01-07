@@ -14,9 +14,10 @@ defusedxml==0.7.1
 Deprecated==1.2.13
 diff-match-patch==20200713
 Django==3.1.6
-django-3-jet==1.0.8
 django-decouple==2.1
 django-import-export==2.6.1
+django-jet==1.0.8
+django-jet-reboot==1.1.1
 django-jsonfield==1.4.1
 django-phonenumber-field==5.2.0
 django-smart-selects==1.5.9
