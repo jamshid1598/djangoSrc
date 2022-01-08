@@ -35,6 +35,8 @@ urlpatterns = [
     path('import_export/', include("apps.django_import_export.urls", namespace='django_export_import')),
     path('import/', include("apps.studentExam.urls", namespace='import')),
     path("try-drf/", include("apps.tryDrf.urls", namespace="try-drf")),
+    path("jet-reboot/", include("apps.jetReboot.urls", namespace="jet_reboot")),
+    path("htmx/", include("apps.htmx.urls", namespace="htmx")),
     # path('celery/',  include("apps.django_celery.urls", namespace='django-celery')),
 ]
 

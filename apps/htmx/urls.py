@@ -7,5 +7,5 @@ from .views import (
 app_name="htmx"
 
 urlpatterns = [
-    path("/", home_view, name='home'),
+    path("", home_view, name='home'),
 ]
