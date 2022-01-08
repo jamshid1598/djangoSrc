@@ -3,4 +3,28 @@
 
 {% block body %}
 
+
+    <a href="{% url 'htmx:home' %}">click me</a>
+
+    <button 
+        data-hx-post="/clicked"
+        data-hx-trigger="click"
+        data-hx-target="#parent-div"
+        data-hx-swap="outerHTML"
+    >   
+        click me
+    </button>
+
+    <div hx-put="{% url 'htmx:home' %}">
+        Put to messages
+    </div>
+
+    <dir hx-post="/mouse_entered" hx-trigger="mouseenter">
+        [Here mouse, Mouse!]
+    </dir>
+
+    <div hx-post="/mouse_entered", hx-trigger="mouseenter once">
+        [here mouse, mouse!]
+    </div>
+
 {% endblock body %}
