@@ -15,12 +15,14 @@ class TestDB(models.Model):
         return self.q
 
 class Student(models.Model):
-    l_name = models.CharField(max_length=255, blank=True, null=True)
-    f_name = models.CharField(max_length=255, blank=True, null=True)
-    m_name = models.CharField(max_length=255, blank=True, null=True)
+    # l_name = models.CharField(max_length=255, blank=True, null=True)
+    # f_name = models.CharField(max_length=255, blank=True, null=True)
+    # m_name = models.CharField(max_length=255, blank=True, null=True)
+    full_name = models.CharField(max_length=255, blank=True, null=True) 
     
     group = models.CharField(max_length=10, blank=True, null=True) 
     direction = models.CharField(max_length=255, blank=True, null=True)
+    subject_count = models.IntegerField(default=0)
     
     fan1 = models.CharField(max_length=255, blank=True, null=True)
     fan2 = models.CharField(max_length=255, blank=True, null=True)
@@ -44,4 +46,4 @@ class Student(models.Model):
     fan20 = models.CharField(max_length=255, blank=True, null=True)
     
     def __str__(self):
-        return f"{self.l_name} {self.f_name} {self.m_name}"
+        return  "%s"%self.full_name # f"{self.l_name} {self.f_name} {self.m_name}"

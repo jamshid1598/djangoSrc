@@ -51,7 +51,8 @@ def import_func(request):
         # name = "test.xls"
         # name = "Talabalar o'qishini ko'chirish (tiklash) jarayonida aniqlangan fanlar farqi bo'yicha ma'lumot.xls"
         # name = "KB - Fanlar farqi bo'yicha ma'lumot (4).xls"
-        name = "Fanlar farqi bo'yicha ma'lumot.xls"
+        # name = "Fanlar farqi bo'yicha ma'lumot.xls"
+        name = "iqtisodiyot_fanlar_farqi.xls"
         file_name = f"/home/jamshid/Documents/django/djangoSrc/apps/studentExam/exam-data/{name}"
         book = xlrd.open_workbook(file_name) # file_contents=input_excel.read(), encoding_override = 'utf8'
         # print("The number of worksheets is {0}".format(book.nsheets))
@@ -73,10 +74,11 @@ def import_func(request):
                     cx = cx.replace("text:", "")
                     cx = cx.strip('\"')
                     cx = cx.strip('\'')
-                    name = cx.split(" ")
-                    instance.l_name = name[0]
-                    instance.f_name = name[1]
-                    instance.m_name = " ".join(i for i in name[2:])
+                    # name = cx.split(" ")
+                    # instance.l_name = name[0]
+                    # instance.f_name = name[1]
+                    # instance.m_name = " ".join(i for i in name[2:])
+                    instance.full_name = cx
                 if idx == 2 and id == 1:
                     cx = cx.replace("text:", "")
                     cx = cx.strip('\"')
@@ -97,46 +99,129 @@ def import_func(request):
                     cx = cx.replace("text:", "")
                     cx = cx.strip('\"')
                     cx = cx.strip('\'')
-                    if id == 1:
+                    # if id in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20] and 'Kurs' not in cx:
+                    #     if not instance.fan1:
+                    #         instance.fan1 = cx
+                    #         instance.subject_count = instance.subject_count + 1
+                    #     if not instance.fan2:
+                    #         instance.fan2 = cx
+                    #         instance.subject_count = instance.subject_count + 1
+                    #     if not instance.fan3:
+                    #         instance.fan3 = cx
+                    #         instance.subject_count = instance.subject_count + 1
+                    #     if not instance.fan4:
+                    #         instance.fan4 = cx
+                    #         instance.subject_count = instance.subject_count + 1
+                    #     if not instance.fan5:
+                    #         instance.fan5 = cx
+                    #         instance.subject_count = instance.subject_count + 1
+                    #     if not instance.fan6:
+                    #         instance.fan6 = cx
+                    #         instance.subject_count = instance.subject_count + 1
+                    #     if not instance.fan7:
+                    #         instance.fan7 = cx
+                    #         instance.subject_count = instance.subject_count + 1
+                    #     if not instance.fan8:
+                    #         instance.fan8 = cx
+                    #         instance.subject_count = instance.subject_count + 1
+                    #     if not instance.fan9:
+                    #         instance.fan9 = cx
+                    #         instance.subject_count = instance.subject_count + 1
+                    #     if not instance.fan10:
+                    #         instance.fan10 = cx
+                    #         instance.subject_count = instance.subject_count + 1
+                    #     if not instance.fan11:
+                    #         instance.fan11 = cx
+                    #         instance.subject_count = instance.subject_count + 1
+                    #     if not instance.fan12:
+                    #         instance.fan12 = cx
+                    #         instance.subject_count = instance.subject_count + 1
+                    #     if not instance.fan13:
+                    #         instance.fan13 = cx
+                    #         instance.subject_count = instance.subject_count + 1
+                    #     if not instance.fan14:
+                    #         instance.fan14 = cx
+                    #         instance.subject_count = instance.subject_count + 1
+                    #     if not instance.fan15:
+                    #         instance.fan15 = cx
+                    #         instance.subject_count = instance.subject_count + 1
+                    #     if not instance.fan16:
+                    #         instance.fan16 = cx
+                    #         instance.subject_count = instance.subject_count + 1
+                    #     if not instance.fan17:
+                    #         instance.fan17 = cx
+                    #         instance.subject_count = instance.subject_count + 1
+                    #     if not instance.fan18:
+                    #         instance.fan18 = cx
+                    #         instance.subject_count = instance.subject_count + 1
+                    #     if not instance.fan19:
+                    #         instance.fan19 = cx
+                    #         instance.subject_count = instance.subject_count + 1
+                    #     if not instance.fan20:
+                    #         instance.fan20 = cx
+                    #         instance.subject_count = instance.subject_count + 1
+                        
+                            
+                    if id == 1 and 'Kurs' not in cx:
                         instance.fan1 = cx
-                    if id == 2:
+                        instance.subject_count += 1
+                    if id == 2 and 'Kurs' not in cx:
                         instance.fan2 = cx
-                    if id == 3:
+                        instance.subject_count += 1
+                    if id == 3 and 'Kurs' not in cx:
                         instance.fan3 = cx
-                    if id == 4:
+                        instance.subject_count += 1
+                    if id == 4 and 'Kurs' not in cx:
                         instance.fan4 = cx
-                    if id == 5:
+                        instance.subject_count += 1
+                    if id == 5 and 'Kurs' not in cx:
                         instance.fan5 = cx
-                    if id == 6:
+                        instance.subject_count += 1
+                    if id == 6 and 'Kurs' not in cx:
                         instance.fan6 = cx
-                    if id == 7:
+                        instance.subject_count += 1
+                    if id == 7 and 'Kurs' not in cx:
                         instance.fan7 = cx
-                    if id == 8:
+                        instance.subject_count += 1
+                    if id == 8 and 'Kurs' not in cx:
                         instance.fan8 = cx
-                    if id == 9:
+                        instance.subject_count += 1
+                    if id == 9 and 'Kurs' not in cx:
                         instance.fan9 = cx
-                    if id == 10:
+                        instance.subject_count += 1
+                    if id == 10 and 'Kurs' not in cx:
                         instance.fan10 = cx
-                    if id == 11:
+                        instance.subject_count += 1
+                    if id == 11 and 'Kurs' not in cx:
                         instance.fan11 = cx
-                    if id == 12:
+                        instance.subject_count += 1
+                    if id == 12 and 'Kurs' not in cx:
                         instance.fan12 = cx
-                    if id == 13:
+                        instance.subject_count += 1
+                    if id == 13 and 'Kurs' not in cx:
                         instance.fan13 = cx
-                    if id == 14:
+                        instance.subject_count += 1
+                    if id == 14 and 'Kurs' not in cx:
                         instance.fan14 = cx
-                    if id == 15:
+                        instance.subject_count += 1
+                    if id == 15 and 'Kurs' not in cx:
                         instance.fan15 = cx
-                    if id == 16:
+                        instance.subject_count += 1
+                    if id == 16 and 'Kurs' not in cx:
                         instance.fan16 = cx
-                    if id == 17:
+                        instance.subject_count += 1
+                    if id == 17 and 'Kurs' not in cx:
                         instance.fan17 = cx
-                    if id == 18:
+                        instance.subject_count += 1
+                    if id == 18 and 'Kurs' not in cx:
                         instance.fan18 = cx
-                    if id == 19:
+                        instance.subject_count += 1
+                    if id == 19 and 'Kurs' not in cx:
                         instance.fan19 = cx
-                    if id == 20:
+                        instance.subject_count += 1
+                    if id == 20 and 'Kurs' not in cx:
                         instance.fan20 = cx
+                        instance.subject_count += 1
                     instance.save()
                     
                 print(cx)

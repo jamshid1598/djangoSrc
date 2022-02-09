@@ -17,12 +17,14 @@ from .models import (
 
 class StudentResource(resources.ModelResource):
     id = fields.Field(attribute='id', column_name='№')
-    l_name = fields.Field(attribute='l_name', column_name='Фамилия')
-    f_name = fields.Field(attribute='f_name', column_name='Исми')
-    m_name = fields.Field(attribute='m_name', column_name='Шарифи')
+    # l_name = fields.Field(attribute='l_name', column_name='Фамилия')
+    # f_name = fields.Field(attribute='f_name', column_name='Исми')
+    # m_name = fields.Field(attribute='m_name', column_name='Шарифи')
+    full_name = fields.Field(attribute='full_name', column_name='FISH')
 
     group = fields.Field(attribute='group', column_name='Группа')
     direction = fields.Field(attribute='direction', column_name='Йўналиш')
+    subject_count = fields.Field(attribute='subject_count', column_name='fan soni')
 
     fan1 = fields.Field(attribute='fan1', column_name='Фан1')
     fan2 = fields.Field(attribute='fan2', column_name='Фан2')
@@ -49,12 +51,14 @@ class StudentResource(resources.ModelResource):
     class Meta:
         model=Student
         fields = (
-            "id", "l_name", "f_name", "m_name", "group", "direction",
+            "id", "full_name", # "l_name", "f_name", "m_name", 
+            "group", "direction", "subject_count",
             "fan1","fan2","fan3","fan4","fan5","fan6","fan7","fan8","fan9","fan10",
             "fan11","fan12","fan13","fan14","fan15","fan16","fan17","fan18","fan19","fan20",
         )
         export_order = (
-            "id", "l_name", "f_name", "m_name", "group", "direction",
+            "id", "full_name", # "l_name", "f_name", "m_name", 
+            "group", "direction", "subject_count",
             "fan1","fan2","fan3","fan4","fan5","fan6","fan7","fan8","fan9","fan10",
             "fan11","fan12","fan13","fan14","fan15","fan16","fan17","fan18","fan19","fan20",
         )

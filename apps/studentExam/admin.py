@@ -19,7 +19,7 @@ from .resources import (
 
 class StudentAdmin(ImportExportModelAdmin, ImportExportActionModelAdmin):
     resource_class = StudentResource
-    list_display = ('id', 'f_name', 'l_name', 'm_name', 'group', 'direction')
+    list_display = ('id', 'full_name', 'group', 'direction')
     
 admin.site.register(Student, StudentAdmin)
 
